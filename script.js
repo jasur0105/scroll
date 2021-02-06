@@ -48,8 +48,8 @@ class mouseOver {
     constructor(object) {
         this.headerContent = document.querySelector(object.element);
         this.headerContent.addEventListener('mouseover', function () {
-            var goX = Math.random() * 1300
-            var goY = Math.random() * 300;
+            var goX = Math.random() * (window.innerWidth - this.clientWidth);
+            var goY = Math.random() * (window.innerHeight - this.clientHeight);
             this.style = `margin-top: ${goY}px; margin-left: ${goX}px;`;
         })
     }
