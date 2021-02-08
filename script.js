@@ -17,9 +17,9 @@ class Scroll {
     scroll() {
         // pageYOffset - хранит расстояние смещения от верхнего края страницы
         // console.log(window.pageYOffset);
-        this.menuTop = this.scrollNumber();
-        if (this.menuTop - window.pageYOffset > 0) {
-            this.el.style.top = this.menuTop - window.pageYOffset + "px";
+        this.window = this.scrollNumber();
+        if (this.window - pageYOffset > 0) {
+            this.el.style.top = this.window - pageYOffset + "px";
         } else {
             this.el.style.top = 0;
         }
@@ -38,10 +38,8 @@ class Scroll {
 
 const myScroll = new Scroll({
     el: ".header__nav",
-    top: 20,
-    unit: "%"
+    top: 100,
 })
-// const myScroll = new Scroll({ el: document.querySelector(".header__nav") })
 
 // случайное перемещение при наведении курсора
 class mouseOver {
@@ -57,3 +55,36 @@ class mouseOver {
 const myMouseOver = new mouseOver({
     element: ".header__content"
 })
+
+// появление букв поочередно
+const text = ['HEADER TITLE'];
+
+let line = 0;
+let count = 0;
+let result = '';
+function typeLine() {
+    let interval = setTimeout(() => {
+        result += text[line][count]
+        document.querySelector('h1').innerHTML = result + '|';
+        count++;
+        if (count >= text[line].length) {
+            count = 0;
+            line++;
+            if (line == text.length) {
+                clearTimeout(interval);
+                document.querySelector('h1').innerHTML = result;
+                return true;
+            }
+        }typeLine()
+    }, 90);
+}
+typeLine()
+
+// Боковое меню
+function openNav() {
+    document.getElementById("status__bar").style.marginLeft = "0";
+}
+
+function closeNav() {
+    document.getElementById("status__bar").style.marginLeft = "-200px";
+}
